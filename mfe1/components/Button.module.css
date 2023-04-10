@@ -1,0 +1,7 @@
+.customButton{
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    background: pink;
+    margin: 0 0 0 10px;
+  }
