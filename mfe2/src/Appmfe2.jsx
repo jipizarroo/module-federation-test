@@ -5,10 +5,7 @@ import "./index.css";
 
 const App = () => (
   <div className="container">
-    <div>Name: mfe2</div>
-    <div>Framework: react</div>
-    <div>Language: JavaScript</div>
-    <div>CSS: Empty CSS</div>
+    <div>Soy una app displayed an un iframe</div>
   </div>
 );
 ReactDOM.render(<App />, document.getElementById("app"));

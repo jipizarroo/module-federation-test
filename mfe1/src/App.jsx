@@ -1,18 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-
 import "./index.css";
-import { Mfe1Container } from "./Mfe1Container";
+import { Header } from "../components/Header";
 
-
-const App = () => {
-  const [test, useTest] = React.useState(false);
-
+export const App = () => {
   return (
-    <div className="container">
-      <Mfe1Container />
+    <div className="container" style={{ background: "red" }}>
+      <div>Estoy dentro del contener MFE1</div>
+      <Header />
     </div>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("app"));
+export default App
