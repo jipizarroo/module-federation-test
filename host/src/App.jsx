@@ -4,6 +4,7 @@ import ErrorBoundary from "./errorHandling/ErrorBoundary";
 
 import "./index.css";
 const Mfe1App = React.lazy(() => import("mfe1/App"));
+const Mfe3App = React.lazy(() => import("mfe3vite/App"));
 
 const RemoteWrapper = ({ children }) => (
   <div
@@ -39,13 +40,18 @@ export const Host = () => {
           <Mfe1App />
         </RemoteWrapper>
       )}
-      <div>
+      {/* <div>
         <RemoteWrapper>
           <iframe
             src="http://localhost:3003/"
             frameborder="0"
             title="local react app 2"
           ></iframe>
+        </RemoteWrapper>
+      </div> */}
+      <div>
+        <RemoteWrapper>
+          <Mfe3App />
         </RemoteWrapper>
       </div>
     </div>
