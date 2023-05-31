@@ -1,0 +1,6 @@
+{
+    "loader": "shadow_dom",
+    "jsFile": "/index.js",
+    "cssFile": "/style.css",
+    "name": "mfe example"
+  }

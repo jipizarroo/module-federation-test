@@ -3,8 +3,10 @@ import ReactDOM from "react-dom";
 import ErrorBoundary from "./errorHandling/ErrorBoundary";
 
 import "./index.css";
-const Mfe1App = React.lazy(() => import("mfe1/App"));
-const Mfe3App = React.lazy(() => import("mfe3vite/App"));
+import { inject, cleanup } from "mfe1/appInjector";
+
+
+const parentElementId = "mfe1"
 
 const RemoteWrapper = ({ children }) => (
   <div
@@ -19,6 +21,13 @@ const RemoteWrapper = ({ children }) => (
 
 export const Host = () => {
   const [mfe1, setMfe1] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log(parentElementId)
+    inject(parentElementId);
+    return () => cleanup(parentElementId);
+  }, []);
+
 
   return (
     <div className="container">
@@ -37,23 +46,10 @@ export const Host = () => {
       </div>
       {mfe1 && (
         <RemoteWrapper>
-          <Mfe1App />
+          {/* <div id={parentElementId}></div> */}
         </RemoteWrapper>
       )}
-      {/* <div>
-        <RemoteWrapper>
-          <iframe
-            src="http://localhost:3003/"
-            frameborder="0"
-            title="local react app 2"
-          ></iframe>
-        </RemoteWrapper>
-      </div> */}
-      <div>
-        <RemoteWrapper>
-          <Mfe3App />
-        </RemoteWrapper>
-      </div>
+      <div id={parentElementId}></div>
     </div>
   );
 };

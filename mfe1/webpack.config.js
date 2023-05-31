@@ -3,8 +3,10 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
+  entry: './src/index',
+  mode: 'development',
   output: {
-    publicPath: "http://localhost:3002/",
+    publicPath: "http://localhost:3001/",
   },
 
   resolve: {
@@ -12,13 +14,14 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 3002,
+    port: 3001,
     historyApiFallback: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-    }
+      "Access-Control-Allow-Headers":
+      "X-Requested-With, content-type, Authorization",
+    },
   },
 
   module: {
@@ -31,8 +34,16 @@ module.exports = (_, argv) => ({
         },
       },
       {
-        test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              insert: require.resolve('./styleLoader.js'),
+            },
+          },
+          'css-loader',
+        ],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
@@ -50,7 +61,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./App": "./src/App.jsx",
+        './appInjector': './src/appInjector',
       },
       shared: {
         ...deps,

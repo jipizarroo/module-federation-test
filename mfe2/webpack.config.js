@@ -12,8 +12,16 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     port: 3003,
     historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   },
 
   module: {
@@ -27,7 +35,7 @@ module.exports = (_, argv) => ({
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,

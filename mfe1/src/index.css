@@ -9,3 +9,7 @@ body {
   margin-top: 20px;
   border: 2px solid red;
 }
+
+h3 {
+  color: blue;
+}
