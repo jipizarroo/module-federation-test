@@ -1,7 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { createShadowContainer } from "../styleLoader";
+import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Run the app in standalone mode
+ReactDOM.render(<App isStandalone />, document.getElementById('mfe1'));
+
+
 
 // const styles = [];
 // const containers = {};
@@ -41,11 +45,11 @@ import { createShadowContainer } from "../styleLoader";
 //   console.log({containers})
 //   containers[0] = shadowContainer;
 
- const appPlaceholder  = createShadowContainer("mfe1")
+//  const appPlaceholder  = createShadowContainer("mfe1")
 
 
-  const root = ReactDOM.createRoot(appPlaceholder)
+//   const root = ReactDOM.createRoot(appPlaceholder)
 
-  root.render(
-    <App />
-  )
+//   root.render(
+//     <App />
+//   )

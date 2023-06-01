@@ -1,9 +1,18 @@
 import React from "react";
+import { Header } from "../components/Header";
+import { runStandalone } from "../styleLoader";
+
 import "./index.css";
 
-import { Header } from "../components/Header";
+export const App = ({ isStandalone = false }) => {
+  React.useEffect(() => {
+    if (!isStandalone) {
+      return;
+    }
+    // If we receive the isStandAlone prop we will initialize the style loader in standalone mode
+    runStandalone();
+  }, [isStandalone]);
 
-export const App = () => {
   return (
     <>
       <div className="container">
