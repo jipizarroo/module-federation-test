@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { EsbuildPlugin } = require("esbuild-loader");
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
@@ -17,30 +18,35 @@ module.exports = (_, argv) => ({
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-    }
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
+    },
   },
 
   module: {
     rules: [
       {
-        test: /\.m?js/,
-        type: "javascript/auto",
-        resolve: {
-          fullySpecified: false,
-        },
-      },
-      {
         test: /\.(css|s[ac]ss)$/i,
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
-        test: /\.(ts|tsx|js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
+        // Match js, jsx, ts & tsx files
+        test: /\.[tj]sx?$/,
+        loader: "esbuild-loader",
+        options: {
+          // JavaScript version to compile to
+          target: "es2015",
+          jsx: "automatic",
         },
       },
+    ],
+  },
+
+  optimization: {
+    minimize: false,
+    minimizer: [
+      // Use esbuild to minify
+      new EsbuildPlugin(),
     ],
   },
 
